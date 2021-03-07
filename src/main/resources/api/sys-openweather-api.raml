@@ -1,0 +1,51 @@
+#%RAML 1.0
+title: sys-openweather-api
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    displayName: Basic Authentication
+    description: This api only works with basic authentication
+protocols: [HTTPS]
+description: This is a weather api basically generates lattitude and longitude of the geographical area based on the zipcode.
+documentation:
+  - title: WEATHER API
+    content: Refere below doc for more information
+
+types:
+  apiresponse:
+    properties:
+      city_name : string
+      country : string
+      long : number
+      lat : number
+      humidity : number
+      temp : number
+      temp_min : number
+      temp_max: number
+/weather:
+  get:
+    queryParameters:
+      zip:
+        description: "Zipcode will be required for this api"
+        required: true
+        type: number
+    description: for generating the lattitude and longitude.
+    displayName: weather API
+    protocols:
+      - HTTPS
+    responses:
+      200:
+        body:
+          application/json:
+            type: apiresponse
+            example:
+              {
+	              "city_name": "Lewisville",
+	              "country": "US",
+	              "long": -96.9925,
+	              "lat": 33.0198,
+	              "humidity": 35,
+	              "temp": 295.24,
+	              "temp_min": 294.26,
+	              "temp_max": 295.93
+              }

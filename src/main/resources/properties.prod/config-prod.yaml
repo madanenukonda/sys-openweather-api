@@ -1,0 +1,9 @@
+api:
+  id: "16664840"
+
+openweathermap :
+  host : "api.openweathermap.org"
+  port : "443"
+  path : "/data/2.5/weather"
+  
+appid : "77310b5fb1879fd128d93bd32f46fbf5"
