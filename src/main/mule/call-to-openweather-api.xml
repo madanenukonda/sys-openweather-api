@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="call-to-openweather-api-sub_flow" doc:id="6c3ac156-eaca-4c38-bc67-199aa2b55a42" >
+		<logger level="INFO" doc:name="log-start" doc:id="e671c35f-eba1-40e8-9343-abfab4958574" message="#[payload]"/>
+		<http:request method="GET" doc:name="openweathermap" doc:id="81cff920-6681-4e69-b2bc-8a4d6617f19c" config-ref="HTTP_openweathermap-org" path="${openweathermap.path}">
+			<http:query-params ><![CDATA[#[%dw 2.0
+output application/json
+---
+ {
+ 	zip : attributes.queryParams.zip,
+ 	appid : p('appid')
+ }]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="log-after-response-payload" doc:id="aaf269a4-9cb6-40b9-80e6-4216da29bf04" message="#[payload]"/>
+		<ee:transform doc:name="map-response-payload" doc:id="17cff4a8-f6f1-42d6-ac0c-b15a409794bd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+ {
+  "city_name": payload.name,
+  "country": payload.sys.country,
+  "long": payload.coord.lon,
+  "lat": payload.coord.lat,
+  "humidity": payload.main.humidity,
+  "temp": payload.main.temp,
+  "temp_min": payload.main.temp_min,
+  "temp_max": payload.main.temp_max
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="log-final-response-payload" doc:id="52613718-cfdd-46c8-b64a-43e6ab2de7c0" message="#[payload]"/>
+	</sub-flow>
+</mule>

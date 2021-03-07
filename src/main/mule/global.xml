@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<global-property doc:name="Global Property" doc:id="4580b157-80d4-450f-85bf-2bbf8a80026a" name="mule.env" value="qa" />
+	<api-gateway:autodiscovery apiId="16664840" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="dc4f0e80-e1f2-4e67-af4e-d1715bdb005c" flowRef="sys-openweather-api-main" />
+	<http:request-config name="HTTP_openweathermap-org" doc:name="HTTP Request configuration" doc:id="fce49e25-ae51-422c-aade-c434a8b7f049" >
+		<http:request-connection protocol="HTTPS" host="${openweathermap.host}" port="${openweathermap.port}" />
+	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="5f683904-5fda-4a7f-a333-72f2f24e7201" file="properties.${mule.env}/config-${mule.env}.yaml" />
+</mule>
