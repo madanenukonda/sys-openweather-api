@@ -1,0 +1,41 @@
+{
+	"coord": {
+		"lon": -121.9999,
+		"lat": 37.5605
+	},
+	"weather": [{
+		"id": 804,
+		"main": "Clouds",
+		"description": "overcast clouds",
+		"icon": "04d"
+	}],
+	"base": "stations",
+	"main": {
+		"temp": 282.5,
+		"feels_like": 278.75,
+		"temp_min": 280.93,
+		"temp_max": 283.71,
+		"pressure": 1023,
+		"humidity": 57
+	},
+	"visibility": 10000,
+	"wind": {
+		"speed": 2.79,
+		"deg": 211
+	},
+	"clouds": {
+		"all": 90
+	},
+	"dt": 1615221865,
+	"sys": {
+		"type": 1,
+		"id": 5122,
+		"country": "US",
+		"sunrise": 1615213741,
+		"sunset": 1615255716
+	},
+	"timezone": -28800,
+	"id": 0,
+	"name": "Fremont",
+	"cod": 200
+}
